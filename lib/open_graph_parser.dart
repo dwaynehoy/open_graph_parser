@@ -11,7 +11,7 @@ class OpenGraphParser {
   /// @returns A map containing the OG-data.
   static Future<Map<String, dynamic>> getOpenGraphData(String url) async {
     var response = await http.get(url);
-    
+
     return getOpenGraphDataFromResponse(response);
   }
 
@@ -20,7 +20,7 @@ class OpenGraphParser {
     Map<String, dynamic> data = new Map<String, dynamic>();
 
     if (response.statusCode == 200) {
-      var document = parser.parse(utf8.decode(response.bodyBytes));
+      var document = parser.parse(response.body);
       var openGraphMetaTags = _getOpenGraphData(document);
 
       openGraphMetaTags.forEach((element) {
